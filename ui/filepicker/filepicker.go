@@ -48,6 +48,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	if didSelect, path := m.filepicker.DidSelectFile(msg); didSelect {
 		// Get the path of the selected file.
 		m.selectedFile = path
+		return m, tea.Quit
 	}
 
 	// Did the user select a disabled file?
@@ -79,7 +80,8 @@ func (m model) View() string {
 	return s.String()
 }
 
-func GetFile(AllowedTypes []string) string {
+// Returns the path of the selected file, first return is formated string, second is simple string
+func GetFile(AllowedTypes []string) (string, string) {
 	fp := filepicker.New()
 	fp.AllowedTypes = AllowedTypes
 	fp.CurrentDirectory, _ = os.UserHomeDir()
@@ -89,5 +91,5 @@ func GetFile(AllowedTypes []string) string {
 	}
 	tm, _ := tea.NewProgram(&m).Run()
 	mm := tm.(model)
-	return m.filepicker.Styles.Selected.Render(mm.selectedFile)
+	return m.filepicker.Styles.Selected.Render(mm.selectedFile), mm.selectedFile
 }

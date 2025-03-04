@@ -14,7 +14,7 @@ func main() {
 	defer db.Close()
 
 	//Get user option
-	selection := optionlist.GetOption([]string{"List expenses", "Add expense", "Modify expense", "Delete expense", "Export expenses"})
+	selection := optionlist.GetOption([]string{"List expenses", "Add expense", "Modify expense", "Delete expense", "Export expenses", "Import expenses"})
 
 	actions.CleanScreen()
 
@@ -30,6 +30,8 @@ func main() {
 		actions.DeleteExpense(db)
 	case "Export expenses":
 		actions.ExportToCSV(db)
+	case "Import expenses":
+		actions.ImportFromCSV(db)
 	default:
 		fmt.Println("No option selected!")
 		return
