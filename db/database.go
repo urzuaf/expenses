@@ -64,10 +64,18 @@ func UpdateData(db *sql.DB, id string, ex Expense) {
 	}
 }
 
-func GetExpenses(db *sql.DB) []string {
-	//Read Data
+func GetExpenses(db *sql.DB, asc bool) []string {
+	var query string
+
 	lines := []string{}
-	rows, err := db.Query("SELECT * FROM expenses")
+
+	if asc {
+		query = "SELECT * FROM expenses ORDER BY id ASC"
+	} else {
+		query = "SELECT * FROM expenses ORDER BY id DESC"
+	}
+
+	rows, err := db.Query(query)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -6,6 +6,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type (
@@ -67,10 +68,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m Model) View() string {
+	inputStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#E37AC1"))
 	return fmt.Sprintf(
 		"%s\n\n%s\n\n%s\n",
 		m.title,
-		m.textInput.View(),
+		inputStyle.Render(m.textInput.View()),
 		"(esc to quit)",
 	) + "\n"
 }

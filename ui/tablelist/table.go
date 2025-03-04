@@ -62,7 +62,7 @@ func DisplayTable(columnNames []table.Column, rowData []table.Row) string {
 		table.WithColumns(columns),
 		table.WithRows(rows),
 		table.WithFocused(true),
-		table.WithHeight(7),
+		table.WithHeight(16),
 	)
 
 	s := table.DefaultStyles()
@@ -73,7 +73,7 @@ func DisplayTable(columnNames []table.Column, rowData []table.Row) string {
 		Bold(false)
 	s.Selected = s.Selected.
 		Foreground(lipgloss.Color("229")).
-		Background(lipgloss.Color("57")).
+		Background(lipgloss.Color("#E37AC1")).
 		Bold(false)
 	t.SetStyles(s)
 

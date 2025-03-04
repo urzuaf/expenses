@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"expenses/ui/optionlist"
+	"expenses/ui/title"
 )
 
 func main() {
@@ -13,8 +14,10 @@ func main() {
 	db := database.Connect()
 	defer db.Close()
 
+	title.DisplayTitle()
+
 	//Get user option
-	selection := optionlist.GetOption([]string{"List expenses", "Add expense", "Modify expense", "Delete expense", "Export expenses", "Import expenses"})
+	selection := optionlist.GetOption([]string{"List expenses", "Add expense", "Get Stats", "Modify expense", "Delete expense", "Export expenses", "Import expenses"})
 
 	actions.CleanScreen()
 
@@ -24,6 +27,8 @@ func main() {
 		actions.ListExpenses(db)
 	case "Add expense":
 		actions.AddExpense(db)
+	case "Get Stats":
+		actions.GetStats(db)
 	case "Modify expense":
 		actions.ModifyExpense(db)
 	case "Delete expense":

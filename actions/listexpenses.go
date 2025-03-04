@@ -23,7 +23,7 @@ func ListExpenses(db *sql.DB) string {
 	}
 
 	//Got every expense as a string
-	expenses := database.GetExpenses(db)
+	expenses := database.GetExpenses(db, false)
 
 	//Parse it into table format
 	for _, expense := range expenses {
