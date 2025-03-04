@@ -86,3 +86,10 @@ func GetExpenses(db *sql.DB) []string {
 	}
 	return lines
 }
+
+func EditExpense(db *sql.DB, ex Expense, id string) {
+	_, err := db.Exec("UPDATE expenses SET description=?,category=?,amount=?,date=? WHERE id=?", ex.Description, ex.Category, ex.Amount, ex.Date, id)
+	if err != nil {
+		log.Fatal(err)
+	}
+}

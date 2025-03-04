@@ -14,16 +14,18 @@ func main() {
 	defer db.Close()
 
 	//Get user option
-	selection := optionlist.GetOption([]string{"Add expense", "List expenses", "Delete expense"})
+	selection := optionlist.GetOption([]string{"List expenses", "Add expense", "Modify expense", "Delete expense"})
 
 	actions.CleanScreen()
 
 	//Process user option
 	switch selection {
-	case "Add expense":
-		actions.AddExpense(db)
 	case "List expenses":
 		actions.ListExpenses(db)
+	case "Add expense":
+		actions.AddExpense(db)
+	case "Modify expense":
+		actions.ModifyExpense(db)
 	case "Delete expense":
 		actions.DeleteExpense(db)
 	default:

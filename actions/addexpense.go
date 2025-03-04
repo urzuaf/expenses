@@ -54,3 +54,26 @@ func AddExpense(db *sql.DB) {
 	database.InsertData(db, newExpense)
 	fmt.Println("Expense ", newExpense.Description, " added successfully")
 }
+
+func ModifyExpense(db *sql.DB) {
+
+	//id to edit
+	id := ListExpenses(db)
+
+	newExpense := database.Expense{}
+
+	newExpense.Amount = textinput.GetInput("Amount of expense", "10000")
+	assertNumber(newExpense.Amount)
+
+	newExpense.Description = textinput.GetInput("Description of expense", "bus ticket")
+	assertNotEmpty(newExpense.Description)
+
+	newExpense.Category = optionlist.GetOption([]string{"Food", "Entertainment", "Transport", "Health", "Savings", "Gifts", "Travel", "Education", "Other"})
+	assertNotEmpty(newExpense.Category)
+
+	newExpense.Date = textinput.GetInput("Date of expense (yyyy-mm-dd)", time.Now().Format("2006-01-02"))
+	assertDate(newExpense.Date)
+
+	database.EditExpense(db, newExpense, id)
+	fmt.Println("Expense ", newExpense.Description, " modified successfully")
+}
