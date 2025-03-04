@@ -15,10 +15,10 @@ type Model struct {
 	result   string
 }
 
-func InitialState() Model {
+func InitialState(options []string) Model {
 
 	m := Model{
-		choices:  options(),
+		choices:  options,
 		selected: make(map[int]struct{}),
 	}
 
@@ -70,13 +70,9 @@ func (m Model) View() string {
 	return s
 }
 
-func options() []string {
-	return []string{"a", "b"}
-}
-
-func GetOption() string {
+func GetOption(options []string) string {
 	choice := ""
-	p := tea.NewProgram(InitialState())
+	p := tea.NewProgram(InitialState(options))
 	model, err := p.Run()
 	if err != nil {
 		log.Fatal(err)

@@ -48,6 +48,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.done = true
 			m.Result = m.textInput.Value()
 			return m, tea.Quit
+		case "tab":
+			if m.textInput.Value() == "" {
+				m.textInput.SetValue(m.textInput.Placeholder)
+			}
 		case "ctrl+c", "esc":
 			return m, tea.Quit
 		}
