@@ -17,6 +17,7 @@ func main() {
 	selection := optionlist.GetOption([]string{"Add expense", "List expenses", "Delete expense"})
 
 	actions.CleanScreen()
+
 	//Process user option
 	switch selection {
 	case "Add expense":
