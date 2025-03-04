@@ -64,8 +64,9 @@ func UpdateData(db *sql.DB, id string, ex Expense) {
 	}
 }
 
-func GetExpenses(db *sql.DB) {
+func GetExpenses(db *sql.DB) []string {
 	//Read Data
+	lines := []string{}
 	rows, err := db.Query("SELECT * FROM expenses")
 	if err != nil {
 		log.Fatal(err)
@@ -79,6 +80,9 @@ func GetExpenses(db *sql.DB) {
 		var amount int
 		var date string
 		rows.Scan(&id, &description, &category, &amount, &date)
-		fmt.Printf("Expense ID: %d - Description: %s - Category: %s - Amount: %d - %s\n", id, description, category, amount, date)
+
+		line := fmt.Sprintf("%d\\%s\\%s\\%d\\%s", id, description, category, amount, date)
+		lines = append(lines, line)
 	}
+	return lines
 }
